@@ -33,7 +33,7 @@ const Container = styled.section`
   max-height: 800px;
   width: 100%;
   height: 90vh;
-  padding: 40px 4px;
+  padding: 40px 0;
   overflow: hidden;
   background-color: #e9e6e4;
 `;

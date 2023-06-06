@@ -1,5 +1,5 @@
 import React from 'react';
-import MenuItem from './MenuItem';
+import MenuItem from '../components/menu/MenuItem';
 import { styled } from 'styled-components';
 
 const MenuLayout = () => {
@@ -10,7 +10,7 @@ const MenuLayout = () => {
       <MenuItem>Diary</MenuItem>
     </MenuList>
   );
-};
+};  
 
 export default MenuLayout;
 
