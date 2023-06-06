@@ -5,7 +5,7 @@ import { styled } from 'styled-components';
 const MenuItem = ({ children }) => {
   const path = children.toLowerCase();
   return (
-    <ItemList to={path === 'home' ? '/' : path}>
+    <ItemList to={path === 'home' ? '/' : `/${path}`}>
       {children}
       <svg
         fill="none"
@@ -27,6 +27,7 @@ export default MenuItem;
 const ItemList = styled(Link)`
   display: flex;
   align-items: center;
+  padding-left: 10px;
   font-size: 22px;
   text-decoration: none;
   letter-spacing: -0.5px;
