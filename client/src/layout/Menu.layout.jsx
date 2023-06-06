@@ -8,9 +8,10 @@ const MenuLayout = () => {
       <MenuItem>Home</MenuItem>
       <MenuItem>Report</MenuItem>
       <MenuItem>Diary</MenuItem>
+      <MenuItem>Login</MenuItem>
     </MenuList>
   );
-};  
+};
 
 export default MenuLayout;
 
