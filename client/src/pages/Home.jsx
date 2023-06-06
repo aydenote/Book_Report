@@ -3,6 +3,7 @@ import MenuLayout from '../layout/Menu.layout';
 import HomeLayout from './Layout';
 import ReportPinLayout from '../layout/ReportPin.layout';
 import ReportThumbnailLayout from '../layout/ReportThumbnail.layout';
+import DiaryLayout from '../layout/Diary.layout';
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       <MenuLayout />
       <ReportPinLayout />
       <ReportThumbnailLayout />
+      <DiaryLayout />
     </HomeLayout>
   );
 };
