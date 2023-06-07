@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled } from 'styled-components';
 
-const Layout = ({ children }) => {
+const HomeLayout = ({ children }) => {
   return (
     <Main>
       <Container>{children}</Container>
@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default HomeLayout;
 
 const Main = styled.main`
   display: flex;
