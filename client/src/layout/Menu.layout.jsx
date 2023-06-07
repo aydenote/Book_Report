@@ -8,7 +8,8 @@ const MenuLayout = () => {
       <MenuItem>Home</MenuItem>
       <MenuItem>Report</MenuItem>
       <MenuItem>Diary</MenuItem>
-      <MenuItem>Login</MenuItem>
+      <MenuItem>SignIn</MenuItem>
+      <MenuItem>SignUp</MenuItem>
     </MenuList>
   );
 };
