@@ -1,9 +1,21 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
+import AddBtn from '../button/Add';
+import ModifyBtn from '../button/Modify';
+import DeleteBtn from '../button/Delete';
 import { styled } from 'styled-components';
 
 const DiarySummary = () => {
+  const pathName = useLocation().pathname;
   return (
     <Container>
+      {pathName !== '/' ? (
+        <BtnWrap>
+          <AddBtn />
+          <ModifyBtn />
+          <DeleteBtn />
+        </BtnWrap>
+      ) : null}
       <Header>
         <DiaryNum>1</DiaryNum>
         <DiaryDate>11.06.2023</DiaryDate>
@@ -63,4 +75,10 @@ const DiaryContent = styled.p`
   font-size: 15px;
   margin-top: 12px;
   line-height: 1.4;
+`;
+
+const BtnWrap = styled.section`
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
 `;
