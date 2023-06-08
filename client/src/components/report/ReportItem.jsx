@@ -2,9 +2,9 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import ThumbnailTitle from './ThumbnailTitle';
 import ThumbnailContent from './ThumbnailContent';
-import AddBtn from '../Button/Add';
-import ModifyBtn from '../Button/Modify';
-import DeleteBtn from '../Button/Delete';
+import AddBtn from '../button/Add';
+import ModifyBtn from '../button/Modify';
+import DeleteBtn from '../button/Delete';
 import { styled } from 'styled-components';
 
 const ReportItem = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import SignInLayout from '../layout/Post.layout';
 import MenuLayout from '../layout/Menu.layout';
-import UserInfo from '../components/Form/UserInfo';
+import UserInfo from '../components/form/UserInfo';
 
 const SignIn = () => {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { FaUserCircle, FaRegAddressCard, FaLock, FaPaperPlane } from 'react-icons/fa';
-import { useLocation } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 const UserInfo = ({ children }) => {
@@ -20,7 +20,7 @@ const UserInfo = ({ children }) => {
         {pathName !== '/signin' ? (
           <InputWrap>
             <NameIcon size={'2rem'} />
-            <InputField id="name" pl {...register('name')} placeholder="Name" />
+            <InputField id="name" placeholder="Name" {...register('name')} />
           </InputWrap>
         ) : null}
         <InputWrap>
@@ -28,9 +28,9 @@ const UserInfo = ({ children }) => {
           <InputField
             id="id"
             type="text"
-            {...register('id', { required: true })}
             placeholder="Personal ID"
             defaultValue={'test'}
+            {...register('id', { required: true })}
           />
         </InputWrap>
         <InputWrap>
@@ -38,9 +38,9 @@ const UserInfo = ({ children }) => {
           <InputField
             id="pw"
             type="password"
-            {...register('password', { required: true })}
             placeholder="Password"
             defaultValue={'test'}
+            {...register('password', { required: true })}
           />
         </InputWrap>
         {errors.id && <ErrText>ID를 입력해주세요.</ErrText>}
@@ -72,7 +72,7 @@ const Title = styled.h1`
   font-size: 2.92rem;
   line-height: 110%;
   text-align: center;
-  margin: 1.46rem 0 1.168rem 0;
+  margin: 1.46rem 0 2.168rem 0;
 `;
 
 const SignInForm = styled.form`

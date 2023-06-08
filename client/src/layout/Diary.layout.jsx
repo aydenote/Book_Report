@@ -1,7 +1,7 @@
 import React from 'react';
-import Quote from '../components/Diary/Quote';
+import Quote from '../components/diary/Quote';
 import { styled } from 'styled-components';
-import SummaryDiary from '../components/Diary/DiarySummary';
+import SummaryDiary from '../components/diary/DiarySummary';
 
 const DiaryLayout = () => {
   return (
