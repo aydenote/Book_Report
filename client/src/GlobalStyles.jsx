@@ -16,7 +16,6 @@ const GlobalStyle = createGlobalStyle`
   }
   input, button {
     background-color: transparent;
-    border: none;
     outline: none;
   }
   h1, h2, h3, h4, h5, h6{
