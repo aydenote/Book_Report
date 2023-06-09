@@ -39,10 +39,6 @@ const DiaryTitle = styled.div`
   @media screen and (max-width: 1260px) {
     margin-top: 6vw;
   }
-
-  @media screen and (max-width: 1400px) {
-    margin-top: 88px;
-  }
 `;
 
 const DiaryWrap = styled.section`
