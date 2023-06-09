@@ -14,7 +14,19 @@ const UserInfo = ({ children }) => {
     formState: { errors },
   } = useForm();
   const pathName = useLocation().pathname;
-  const onSubmit = data => {};
+  const onSubmit = data => {
+    const { name, id, password } = data;
+    console.log(name, id, password);
+    if (pathName !== '/signin') {
+      aixos.post('http://localhost:8080/register', {
+        data: {
+          name,
+          id,
+          password,
+        },
+      });
+    } else console.log('로그인');
+  };
 
   return (
     <Container>

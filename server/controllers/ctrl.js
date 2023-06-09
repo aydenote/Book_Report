@@ -8,8 +8,8 @@ const process = {
   login: () => {
     console.log('로그인');
   },
-  register: () => {
-    console.log('회원가입');
+  register: async (req, res) => {
+    console.log(req.body.data);
   },
 };
 
