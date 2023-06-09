@@ -1,7 +1,10 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { FaUserCircle, FaRegAddressCard, FaLock, FaPaperPlane } from 'react-icons/fa';
+import aixos from 'axios';
+import SignUp from '../button/SignUp';
+import SignIn from '../button/SignIn';
+import { FaUserCircle, FaRegAddressCard, FaLock } from 'react-icons/fa';
 import { styled } from 'styled-components';
 
 const UserInfo = ({ children }) => {
@@ -10,8 +13,8 @@ const UserInfo = ({ children }) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = data => console.log(data);
   const pathName = useLocation().pathname;
+  const onSubmit = data => {};
 
   return (
     <Container>
@@ -45,12 +48,7 @@ const UserInfo = ({ children }) => {
         </InputWrap>
         {errors.id && <ErrText>ID를 입력해주세요.</ErrText>}
         {errors.password && <ErrText>Password를 입력해주세요.</ErrText>}
-        <BtnWrap>
-          <Submit type="submit">
-            제출
-            <SubmitIcon size={20} />
-          </Submit>
-        </BtnWrap>
+        {pathName !== '/signin' ? <SignUp /> : <SignIn />}
       </SignInForm>
     </Container>
   );
@@ -135,30 +133,4 @@ const ErrText = styled.p`
   margin-bottom: 10px;
   text-align: center;
   font-family: 'Roboto', sans-serif;
-`;
-
-const BtnWrap = styled.div`
-  text-align: center;
-`;
-
-const Submit = styled.button`
-  display: flex;
-  gap: 10px;
-  margin: auto;
-  padding: 0.5rem 2rem;
-  border: none;
-  border-radius: 2px;
-  font-size: 18px;
-  transition: 0.3s ease-out;
-  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
-  color: #fff;
-  background-color: #26a69a;
-  cursor: pointer;
-  &:hover {
-    background-color: #2bbbad;
-  }
-`;
-
-const SubmitIcon = styled(FaPaperPlane)`
-  color: #fff;
 `;
