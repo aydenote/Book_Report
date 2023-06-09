@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import aixos from 'axios';
+import { handleLogin, handleSignup } from '../../apis/user';
 import SignUp from '../button/SignUp';
 import SignIn from '../button/SignIn';
 import { FaUserCircle, FaRegAddressCard, FaLock } from 'react-icons/fa';
@@ -14,18 +14,15 @@ const UserInfo = ({ children }) => {
     formState: { errors },
   } = useForm();
   const pathName = useLocation().pathname;
-  const onSubmit = data => {
+  const onSubmit = async data => {
     const { name, id, password } = data;
-    console.log(name, id, password);
     if (pathName !== '/signin') {
-      aixos.post('http://localhost:8080/register', {
-        data: {
-          name,
-          id,
-          password,
-        },
-      });
-    } else console.log('로그인');
+      const result = await handleSignup(name, id, password);
+      console.log(result);
+    } else {
+      const result = handleLogin(id, password);
+      console.log(result);
+    }
   };
 
   return (
