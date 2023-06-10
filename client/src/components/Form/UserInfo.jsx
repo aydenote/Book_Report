@@ -16,19 +16,40 @@ const UserInfo = ({ children }) => {
   } = useForm();
   const navigate = useNavigate();
   const pathName = useLocation().pathname;
+
+  /** 로그인, 회원가입 API 호출 함수 */
   const onSubmit = async data => {
     const { name, id, password } = data;
     if (pathName !== '/signin') {
       const result = await handleSignup(name, id, password);
-      if (!result.success) {
-        setError('duplicated', {
-          type: 'custom',
-          message: '이미 가입된 ID 입니다.',
-        });
-      } else navigate('/signin');
+      handleSignupRes(result);
     } else {
-      const result = handleLogin(id, password);
-      console.log(result);
+      const result = await handleLogin(id, password);
+      handleLoginRes(result);
+    }
+  };
+
+  /** 회원가입 성공 여부에 따라 에러 출력 및 페이지 이동 함수*/
+  const handleSignupRes = result => {
+    if (!result.success) {
+      setError('signupErr', {
+        type: 'custom',
+        message: '이미 가입된 ID 입니다.',
+      });
+    } else {
+      navigate('/signin');
+    }
+  };
+
+  /** 로그인 성공 여부에 따라 에러 출력 및 페이지 이동 함수 */
+  const handleLoginRes = result => {
+    if (!result.success) {
+      setError('loginErr', {
+        type: 'custom',
+        message: `${result.msg}`,
+      });
+    } else {
+      navigate('/');
     }
   };
 
@@ -64,7 +85,8 @@ const UserInfo = ({ children }) => {
         </InputWrap>
         {errors.id && <ErrText>ID를 입력해주세요.</ErrText>}
         {errors.password && <ErrText>Password를 입력해주세요.</ErrText>}
-        {errors.duplicated && <ErrText>{errors.duplicated.message}</ErrText>}
+        {errors.signupErr && <ErrText>{errors.signupErr.message}</ErrText>}
+        {errors.loginErr && <ErrText>{errors.loginErr.message}</ErrText>}
         {pathName !== '/signin' ? <SignUp /> : <SignIn />}
       </SignInForm>
     </Container>

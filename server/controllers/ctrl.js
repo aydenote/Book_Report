@@ -6,8 +6,11 @@ const output = (req, res) => {
 };
 
 const process = {
-  login: () => {
-    console.log('로그인');
+  login: async (req, res) => {
+    const user = new User(req.body.data);
+    const response = await user.login();
+
+    return res.json(response);
   },
   register: async (req, res) => {
     const user = new User(req.body.data);
