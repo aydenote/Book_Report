@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { handleLogin, handleSignup } from '../../apis/user';
 import SignUp from '../button/SignUp';
@@ -12,13 +12,20 @@ const UserInfo = ({ children }) => {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm();
+  const navigate = useNavigate();
   const pathName = useLocation().pathname;
   const onSubmit = async data => {
     const { name, id, password } = data;
     if (pathName !== '/signin') {
       const result = await handleSignup(name, id, password);
-      console.log(result);
+      if (!result.success) {
+        setError('duplicated', {
+          type: 'custom',
+          message: '이미 가입된 ID 입니다.',
+        });
+      } else navigate('/signin');
     } else {
       const result = handleLogin(id, password);
       console.log(result);
@@ -57,6 +64,7 @@ const UserInfo = ({ children }) => {
         </InputWrap>
         {errors.id && <ErrText>ID를 입력해주세요.</ErrText>}
         {errors.password && <ErrText>Password를 입력해주세요.</ErrText>}
+        {errors.duplicated && <ErrText>{errors.duplicated.message}</ErrText>}
         {pathName !== '/signin' ? <SignUp /> : <SignIn />}
       </SignInForm>
     </Container>
@@ -142,4 +150,5 @@ const ErrText = styled.p`
   margin-bottom: 10px;
   text-align: center;
   font-family: 'Roboto', sans-serif;
+  color: red;
 `;

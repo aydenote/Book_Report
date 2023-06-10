@@ -12,13 +12,8 @@ const process = {
   register: async (req, res) => {
     const user = new User(req.body.data);
     const response = await user.register();
-    const url = {
-      method: 'POST',
-      path: '/register',
-      status: response.err ? 409 : 201,
-    };
 
-    return res.status(url.status).json(response);
+    return res.json(response);
   },
 };
 

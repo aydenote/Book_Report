@@ -14,7 +14,7 @@ class User {
       return response;
     } catch (err) {
       console.error(err);
-      return false;
+      return { success: false, err };
     }
   }
 }
