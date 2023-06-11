@@ -13,6 +13,7 @@ const UserInfo = ({ children }) => {
     handleSubmit,
     formState: { errors },
     setError,
+    clearErrors,
   } = useForm();
   const navigate = useNavigate();
   const pathName = useLocation().pathname;
@@ -53,10 +54,16 @@ const UserInfo = ({ children }) => {
     }
   };
 
+  /** 로그인, 회원가입 에러 초기화 함수 */
+  const handleErrorReset = () => {
+    clearErrors('loginErr');
+    clearErrors('signupErr');
+  };
+
   return (
     <Container>
       <Title>{children}</Title>
-      <SignInForm onSubmit={handleSubmit(onSubmit)}>
+      <SignInForm onSubmit={handleSubmit(onSubmit)} onChange={handleErrorReset}>
         {pathName !== '/signin' ? (
           <InputWrap>
             <NameIcon size={'2rem'} />

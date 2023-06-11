@@ -5,7 +5,7 @@ import { styled } from 'styled-components';
 const SignIn = () => {
   return (
     <BtnWrap>
-      <BtnLogin>
+      <BtnLogin type="submit">
         로그인
         <SubmitIcon size={20} />
       </BtnLogin>
