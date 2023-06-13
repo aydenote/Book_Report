@@ -1,8 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 const Add = () => {
-  return <AddBtn>게시글 생성</AddBtn>;
+  const navigate = useNavigate();
+
+  const handleAddPost = () => {
+    navigate('write');
+  };
+
+  return <AddBtn onClick={() => handleAddPost()}>게시글 생성</AddBtn>;
 };
 
 export default Add;
