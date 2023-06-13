@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
     text-decoration: none;
   }
-  input, button {
+  input, button, textarea {
     background-color: transparent;
     outline: none;
   }
