@@ -43,12 +43,15 @@ const ReportInfo = () => {
         </ImgWrap>
         <InputWrap>
           <InputTitle id="title" type="text" placeholder="Report Title" {...register('title', { required: true })} />
+          {errors.title && <ErrText>제목을 입력해주세요.</ErrText>}
           <InputContent
             id="content"
             type="text"
             placeholder="Report Content"
             {...register('content', { required: true })}
           />
+          {errors.content && <ErrText>내용을 입력해주세요.</ErrText>}
+
           <ButtonWrap>
             <Create />
             <Cancel />
@@ -170,4 +173,10 @@ const ButtonWrap = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+`;
+
+const ErrText = styled.p`
+  margin-bottom: 10px;
+  font-family: 'Roboto', sans-serif;
+  color: red;
 `;
