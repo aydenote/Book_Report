@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Create from '../button/Create';
 import Cancel from '../button/Cancel';
+import { createPost } from '../../apis/post';
 import { styled } from 'styled-components';
 
 const ReportInfo = () => {
@@ -15,8 +16,12 @@ const ReportInfo = () => {
   const image = watch('image');
 
   const onSubmit = data => {
+    const formData = new FormData();
     const { title, content, image } = data;
-    console.log(data);
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('image', image[0]);
+    createPost(formData);
   };
 
   // 이미지 파일 업로드 시 blob 형식으로 state에 저장
@@ -30,7 +35,7 @@ const ReportInfo = () => {
   return (
     <>
       <Title>create report</Title>
-      <ReportForm onSubmit={handleSubmit(onSubmit)}>
+      <ReportForm onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <ImgWrap>
           <ImagePreview src={imageSrc} />
           <UploadWrap>
