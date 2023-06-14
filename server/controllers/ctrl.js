@@ -18,6 +18,13 @@ const process = {
 
     return res.json(response);
   },
+
+  create: async (req, res) => {
+    const { title, content } = req.body;
+    const imageFile = req.file;
+    console.log(title, content);
+    console.log(imageFile);
+  },
 };
 
 module.exports = { output, process };
