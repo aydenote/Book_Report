@@ -16,9 +16,7 @@ const ReportInfo = () => {
 
   const onSubmit = data => {
     const { title, content, image } = data;
-    console.log(title);
-    console.log(content);
-    console.log(image[0]);
+    console.log(data);
   };
 
   // 이미지 파일 업로드 시 blob 형식으로 state에 저장
@@ -166,6 +164,24 @@ const InputContent = styled.textarea`
   transition: border-color 0.3s;
   &:focus {
     border-color: #26a69a;
+  }
+
+  /* 스크롤바 커스텀 스타일 */
+  scrollbar-width: thin;
+  scrollbar-color: #888888 #f4f4f4;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #888888;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #f4f4f4;
+    border-radius: 4px;
   }
 `;
 
