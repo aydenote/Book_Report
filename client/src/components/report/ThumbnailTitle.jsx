@@ -15,12 +15,7 @@ const BookTitle = styled.p`
   line-height: 1;
   margin-bottom: 6px;
 
-  @media screen and (max-width: 1260px) {
-    font-size: 9vw;
-    letter-spacing: -2px;
-  }
-
   @media screen and (max-width: 1400px) {
-    font-size: 60px;
+    font-size: 6vw;
   }
 `;
