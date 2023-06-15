@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import uuid from 'react-uuid';
 import Create from '../button/Create';
 import Cancel from '../button/Cancel';
 import { createPost } from '../../apis/post';
@@ -18,6 +19,9 @@ const ReportInfo = () => {
   const onSubmit = data => {
     const formData = new FormData();
     const { title, content, image } = data;
+    const postId = uuid();
+    formData.append('userId', 'test');
+    formData.append('postId', postId);
     formData.append('title', title);
     formData.append('content', content);
     formData.append('image', image[0]);
