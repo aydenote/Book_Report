@@ -77,7 +77,7 @@ const UserInfo = ({ children }) => {
             type="text"
             placeholder="Personal ID"
             defaultValue={'test'}
-            {...register('id', { required: true })}
+            {...register('id', { required: true, minLength: 4, maxLength: 16 })}
           />
         </InputWrap>
         <InputWrap>
@@ -87,11 +87,11 @@ const UserInfo = ({ children }) => {
             type="password"
             placeholder="Password"
             defaultValue={'test'}
-            {...register('password', { required: true })}
+            {...register('password', { required: true, minLength: 4, maxLength: 16 })}
           />
         </InputWrap>
-        {errors.id && <ErrText>ID를 입력해주세요.</ErrText>}
-        {errors.password && <ErrText>Password를 입력해주세요.</ErrText>}
+        {errors.id && <ErrText>4~16 자의 ID를 입력해주세요.</ErrText>}
+        {errors.password && <ErrText>4~16 자의 Password를 입력해주세요.</ErrText>}
         {errors.signupErr && <ErrText>{errors.signupErr.message}</ErrText>}
         {errors.loginErr && <ErrText>{errors.loginErr.message}</ErrText>}
         {pathName !== '/signin' ? <SignUp /> : <SignIn />}
