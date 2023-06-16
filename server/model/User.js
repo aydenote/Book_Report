@@ -1,6 +1,7 @@
 'use strict';
 
 const UserStorage = require('./UserStorage');
+const { jwt, token } = require('../config/token');
 
 class User {
   constructor(body) {
@@ -13,7 +14,7 @@ class User {
       const user = await UserStorage.getUserInfo(client.id);
       if (user) {
         if (user.id === client.id && user.password === client.password) {
-          return { success: true };
+          return { success: true, token };
         }
         return { success: false, msg: '비밀번호가 틀렸습니다.' };
       }
