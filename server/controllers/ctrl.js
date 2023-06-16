@@ -1,5 +1,6 @@
 const path = require('path');
 const User = require('../model/User');
+const Post = require('../model/Post');
 
 const output = (req, res) => {
   res.sendFile(path.join(__dirname, '../../client/build/index.html'));
@@ -12,6 +13,7 @@ const process = {
 
     return res.json(response);
   },
+
   register: async (req, res) => {
     const user = new User(req.body.data);
     const response = await user.register();
@@ -20,10 +22,11 @@ const process = {
   },
 
   create: async (req, res) => {
-    const { title, content } = req.body;
-    const imageFile = req.file;
-    console.log(title, content);
-    console.log(imageFile);
+    const imageFile = req.file.path;
+    const post = new Post(req.body, imageFile);
+    const response = await post.add();
+
+    return res.json(response);
   },
 };
 
