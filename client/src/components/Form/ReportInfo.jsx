@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import uuid from 'react-uuid';
 import Create from '../button/Create';
@@ -13,10 +14,11 @@ const ReportInfo = () => {
     formState: { errors },
     watch,
   } = useForm();
+  const navigate = useNavigate();
   const [imageSrc, setImageSrc] = useState(null);
   const image = watch('image');
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     const formData = new FormData();
     const { title, content, image } = data;
     const postId = uuid();
@@ -25,7 +27,14 @@ const ReportInfo = () => {
     formData.append('title', title);
     formData.append('content', content);
     formData.append('image', image[0]);
-    createPost(formData);
+
+    try {
+      const res = await createPost(formData);
+      if (res.success) navigate(-1);
+    } catch (error) {
+      console.error(error);
+      alert(`${error.response.data.error}`);
+    }
   };
 
   // 이미지 파일 업로드 시 blob 형식으로 state에 저장
