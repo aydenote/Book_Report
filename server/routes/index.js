@@ -3,6 +3,7 @@
 const express = require('express');
 const controller = require('../controllers/ctrl');
 const upload = require('../config/multer');
+const { authenticateToken } = require('../config/token');
 const router = express.Router();
 
 router.get('*', controller.output);
@@ -12,6 +13,6 @@ router.post('/login', controller.process.login);
 router.post('/register', controller.process.register);
 
 // 게시물 정보
-router.post('/report/write', upload.single('image'), controller.process.create);
+router.post('/report/write', authenticateToken, upload.single('image'), controller.process.create);
 
 module.exports = router;
