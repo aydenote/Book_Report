@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { handleLogin, handleSignup } from '../../apis/user';
+import { setCookie } from '../../cookie';
 import SignUp from '../button/SignUp';
 import SignIn from '../button/SignIn';
 import { FaUserCircle, FaRegAddressCard, FaLock } from 'react-icons/fa';
@@ -13,6 +14,7 @@ const UserInfo = ({ children }) => {
     handleSubmit,
     formState: { errors },
     setError,
+    watch,
     clearErrors,
   } = useForm();
   const navigate = useNavigate();
@@ -50,6 +52,8 @@ const UserInfo = ({ children }) => {
         message: `${result.msg}`,
       });
     } else {
+      setCookie('id', watch().id);
+      setCookie('token', result.token);
       navigate('/');
     }
   };
