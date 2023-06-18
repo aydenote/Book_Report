@@ -27,7 +27,7 @@ const Main = styled.main`
 const Container = styled.section`
   position: relative;
   display: grid;
-  grid-template-columns: 15% 20% 35% 30%;
+  grid-template-columns: 15% 20% 32.5% 32.5%;
   grid-template-rows: 100%;
   max-width: 1350px;
   max-height: 800px;
