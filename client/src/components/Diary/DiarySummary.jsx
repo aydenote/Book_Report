@@ -71,7 +71,6 @@ const DiaryTitle = styled.p`
 `;
 
 const DiaryContent = styled.p`
-  max-width: 33ch;
   font-size: 15px;
   margin-top: 12px;
   line-height: 1.4;
