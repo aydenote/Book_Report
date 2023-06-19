@@ -2,12 +2,16 @@ import React from 'react';
 import ReportLayout from '../layout/Post.layout';
 import MenuLayout from '../layout/Menu.layout';
 import DiaryLayout from '../layout/Diary.layout';
+import LoginLinkLayout from '../layout/LoginLink.layout';
+import { getCookie } from '../cookie';
 
 const Diary = () => {
+  const token = getCookie('token');
+
   return (
     <ReportLayout>
       <MenuLayout />
-      <DiaryLayout />
+      {token ? <DiaryLayout /> : <LoginLinkLayout />}
     </ReportLayout>
   );
 };
