@@ -1,6 +1,7 @@
 import React from 'react';
 import MenuLayout from '../layout/Menu.layout';
 import PostLayout from '../layout/Post.layout';
+import HomeLayout from '../layout/Home.layout';
 import ReportPinLayout from '../layout/ReportPin.layout';
 import ReportThumbnailLayout from '../layout/ReportThumbnail.layout';
 import DiaryLayout from '../layout/Diary.layout';
@@ -10,18 +11,17 @@ import { getCookie } from '../cookie';
 const Home = () => {
   const token = getCookie('token');
 
-  return (
+  return token ? (
+    <HomeLayout>
+      <MenuLayout />
+      <ReportPinLayout />
+      <ReportThumbnailLayout />
+      <DiaryLayout />
+    </HomeLayout>
+  ) : (
     <PostLayout>
       <MenuLayout />
-      {token ? (
-        <>
-          <ReportPinLayout />
-          <ReportThumbnailLayout />
-          <DiaryLayout />
-        </>
-      ) : (
-        <LoginLinkLayout />
-      )}
+      <LoginLinkLayout />
     </PostLayout>
   );
 };
