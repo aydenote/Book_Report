@@ -6,8 +6,6 @@ const upload = require('../config/multer');
 const { authenticateToken } = require('../config/token');
 const router = express.Router();
 
-router.get('*', controller.output);
-
 // 사용자 정보
 router.post('/login', controller.process.login);
 router.post('/register', controller.process.register);

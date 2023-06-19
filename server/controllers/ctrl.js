@@ -2,10 +2,6 @@ const path = require('path');
 const User = require('../model/User');
 const Post = require('../model/Post');
 
-const output = (req, res) => {
-  res.sendFile(path.join(__dirname, '../../client/build/index.html'));
-};
-
 const process = {
   login: async (req, res) => {
     const user = new User(req.body.data);
@@ -30,4 +26,4 @@ const process = {
   },
 };
 
-module.exports = { output, process };
+module.exports = { process };
