@@ -1,15 +1,24 @@
 import React from 'react';
 import MenuItem from '../components/menu/MenuItem';
+import Logout from '../components/button/Logout';
+import { getCookie } from '../cookie';
 import { styled } from 'styled-components';
 
 const MenuLayout = () => {
+  const token = getCookie('token');
   return (
     <MenuList>
       <MenuItem>Home</MenuItem>
       <MenuItem>Report</MenuItem>
       <MenuItem>Diary</MenuItem>
-      <MenuItem>SignIn</MenuItem>
-      <MenuItem>SignUp</MenuItem>
+      {token ? (
+        <Logout />
+      ) : (
+        <>
+          <MenuItem>SignIn</MenuItem>
+          <MenuItem>SignUp</MenuItem>
+        </>
+      )}
     </MenuList>
   );
 };
