@@ -20,8 +20,15 @@ const process = {
   create: async (req, res) => {
     const imageFile = req.file.path;
     const post = new Post(req.body, imageFile);
-    const response = await post.add();
+    const response = await post.addPost();
 
+    return res.json(response);
+  },
+
+  read: async (req, res) => {
+    const userId = req.query.id;
+    const post = new Post();
+    const response = await post.getAllPost(userId);
     return res.json(response);
   },
 };
