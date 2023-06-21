@@ -12,5 +12,6 @@ router.post('/register', controller.process.register);
 
 // 게시물 정보
 router.post('/report/write', authenticateToken, upload.single('image'), controller.process.create);
+router.get('/report/read', authenticateToken, controller.process.read);
 
 module.exports = router;
