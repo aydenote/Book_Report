@@ -6,11 +6,20 @@ class Post {
     this.imagePath = imagePath;
   }
 
-  async add() {
+  async addPost() {
     const client = this.body;
     const imagePath = this.imagePath;
     try {
       const response = await PostStorage.save(client.userId, client.postId, client.title, client.content, imagePath);
+      return response;
+    } catch (err) {
+      return { success: false, err };
+    }
+  }
+
+  async getAllPost(userId) {
+    try {
+      const response = await PostStorage.getPostsInfo(userId);
       return response;
     } catch (err) {
       return { success: false, err };
