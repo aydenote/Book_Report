@@ -5,6 +5,7 @@ import uuid from 'react-uuid';
 import Create from '../button/Create';
 import Cancel from '../button/Cancel';
 import { createPost } from '../../apis/post';
+import { getCurrentDate } from '../../util/date';
 import { styled } from 'styled-components';
 
 const ReportInfo = () => {
@@ -22,10 +23,12 @@ const ReportInfo = () => {
     const formData = new FormData();
     const { title, content, image } = data;
     const postId = uuid();
+
     formData.append('userId', 'test');
     formData.append('postId', postId);
     formData.append('title', title);
     formData.append('content', content);
+    formData.append('date', getCurrentDate());
     formData.append('image', image[0]);
 
     try {
