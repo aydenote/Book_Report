@@ -26,9 +26,19 @@ const process = {
   },
 
   read: async (req, res) => {
-    const userId = req.query.id;
+    const userId = req.query.userId;
     const post = new Post();
     const response = await post.getAllPost(userId);
+
+    return res.json(response);
+  },
+
+  delete: async (req, res) => {
+    const userId = req.query.userId;
+    const postId = req.query.postId;
+    const post = new Post();
+    const response = await post.delPost(userId, postId);
+
     return res.json(response);
   },
 };
