@@ -21,6 +21,16 @@ class PostStorage {
       });
     });
   }
+
+  static delete(postId) {
+    return new Promise((resolve, reject) => {
+      const query = 'DELETE FROM posts WHERE postId = ?;';
+      db.query(query, [postId], (err, data) => {
+        if (err) reject(`${err}`);
+        else resolve({ success: true });
+      });
+    });
+  }
 }
 
 module.exports = PostStorage;
