@@ -10,7 +10,15 @@ class Post {
     const client = this.body;
     const imagePath = this.imagePath;
     try {
-      const response = await PostStorage.save(client.userId, client.postId, client.title, client.content, imagePath);
+      const response = await PostStorage.save(
+        client.userId,
+        client.postId,
+        client.bookTitle,
+        client.postTitle,
+        client.content,
+        client.date,
+        imagePath
+      );
       return response;
     } catch (err) {
       return { success: false, err };
@@ -21,6 +29,18 @@ class Post {
     try {
       const response = await PostStorage.getPostsInfo(userId);
       return response;
+    } catch (err) {
+      return { success: false, err };
+    }
+  }
+
+  async delPost(userId, postId) {
+    try {
+      const response = await PostStorage.delete(postId);
+      if (response.success) {
+        const postsData = this.getAllPost(userId);
+        return postsData;
+      }
     } catch (err) {
       return { success: false, err };
     }

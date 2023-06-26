@@ -11,10 +11,11 @@ class PostStorage {
     });
   }
 
-  static async save(userId, postId, title, content, date, imagePath) {
+  static async save(userId, postId, bookTitle, postTitle, content, date, imagePath) {
     return new Promise((resolve, reject) => {
-      const query = 'INSERT INTO posts(userId, postId, title, content, date, imagePath) VALUES(?, ?, ?, ?, ?, ?);';
-      db.query(query, [userId, postId, title, content, date, imagePath], (err, _) => {
+      const query =
+        'INSERT INTO posts(userId, postId, bookTitle, postTitle, content, date, imagePath) VALUES(?, ?, ?, ?, ?, ?, ?);';
+      db.query(query, [userId, postId, bookTitle, postTitle, content, date, imagePath], (err, _) => {
         if (err) reject(`${err}`);
         else resolve({ success: true });
       });

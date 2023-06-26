@@ -7,6 +7,7 @@ import Cancel from '../button/Cancel';
 import { createPost } from '../../apis/post';
 import { getCurrentDate } from '../../util/date';
 import { styled } from 'styled-components';
+import { getCookie } from '../../cookie';
 
 const ReportInfo = () => {
   const {
@@ -20,23 +21,26 @@ const ReportInfo = () => {
   const image = watch('image');
 
   const onSubmit = async data => {
-    const formData = new FormData();
-    const { title, content, image } = data;
+    const { bookTitle, postTitle, content, image } = data;
     const postId = uuid();
+    const userId = getCookie('id');
+    const currentDate = getCurrentDate();
+    const formData = new FormData();
 
-    formData.append('userId', 'test');
+    formData.append('userId', userId);
     formData.append('postId', postId);
-    formData.append('title', title);
+    formData.append('bookTitle', bookTitle);
+    formData.append('postTitle', postTitle);
     formData.append('content', content);
-    formData.append('date', getCurrentDate());
+    formData.append('date', currentDate);
     formData.append('image', image[0]);
 
     try {
       const res = await createPost(formData);
       if (res.success) navigate(-1);
-    } catch (error) {
-      console.error(error);
-      alert(`${error.response.data.error}`);
+    } catch (err) {
+      console.error(err);
+      alert(`${err.response.data.error}`);
     }
   };
 
@@ -61,8 +65,20 @@ const ReportInfo = () => {
           </UploadWrap>
         </ImgWrap>
         <InputWrap>
-          <InputTitle id="title" type="text" placeholder="Report Title" {...register('title', { required: true })} />
-          {errors.title && <ErrText>제목을 입력해주세요.</ErrText>}
+          <InputTitle
+            id="bookTitle"
+            type="text"
+            placeholder="Book Title"
+            {...register('bookTitle', { required: true })}
+          />
+          {errors.title && <ErrText>책 제목을 입력해주세요.</ErrText>}
+          <InputTitle
+            id="postTitle"
+            type="text"
+            placeholder="Report Title"
+            {...register('postTitle', { required: true })}
+          />
+          {errors.title && <ErrText>게시물 제목을 입력해주세요.</ErrText>}
           <InputContent
             id="content"
             type="text"
@@ -70,7 +86,6 @@ const ReportInfo = () => {
             {...register('content', { required: true })}
           />
           {errors.content && <ErrText>내용을 입력해주세요.</ErrText>}
-
           <ButtonWrap>
             <Create />
             <Cancel />
