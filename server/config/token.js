@@ -1,16 +1,33 @@
 const jwt = require('jsonwebtoken');
 
 // JWT 토큰 설정
-const token = jwt.sign(
-  {
-    type: 'JWT',
-  },
-  process.env.TOKEN_SECRET_KEY,
-  {
-    expiresIn: '60m',
-    issuer: 'ayden',
-  }
-);
+const createAccessToken = userId => {
+  return jwt.sign(
+    {
+      userId,
+      type: 'JWT',
+    },
+    process.env.ACCESS_TOKEN_KEY,
+    {
+      expiresIn: '1m',
+      issuer: 'ayden',
+    }
+  );
+};
+
+const createRefreshToken = userId => {
+  return jwt.sign(
+    {
+      userId,
+      type: 'JWT',
+    },
+    process.env.REFRESH_TOKEN_KEY,
+    {
+      expiresIn: '2m',
+      issuer: 'ayden',
+    }
+  );
+};
 
 // 인증 미들웨어
 const authenticateToken = (req, res, next) => {
@@ -26,7 +43,7 @@ const authenticateToken = (req, res, next) => {
 };
 
 module.exports = {
-  jwt,
-  token,
+  createAccessToken,
+  createRefreshToken,
   authenticateToken,
 };
