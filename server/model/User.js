@@ -16,6 +16,8 @@ class User {
         if (user.id === client.id && user.password === client.password) {
           const newAccessToken = createAccessToken(user.id);
           const newRefreshToken = createRefreshToken(user.id);
+          await UserStorage.setToken(user.id, newRefreshToken);
+
           return { success: true, newAccessToken, newRefreshToken };
         }
         return { success: false, msg: '비밀번호가 틀렸습니다.' };

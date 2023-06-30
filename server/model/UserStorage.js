@@ -13,6 +13,16 @@ class UserStorage {
     });
   }
 
+  static setToken(id, refreshToken) {
+    return new Promise((resolve, reject) => {
+      const query = 'UPDATE users SET refreshToken = ? WHERE id = ?;';
+      db.query(query, [refreshToken, id], (err, data) => {
+        if (err) reject(`${err}`);
+        else resolve(data[0]);
+      });
+    });
+  }
+
   static async save(userInfo) {
     return new Promise((resolve, reject) => {
       const query = 'INSERT INTO users(id, name, password) VALUES(?, ?, ?);';
