@@ -2,7 +2,7 @@ import aixos from 'axios';
 
 export const handleLogin = async (id, password) => {
   const res = await aixos.post('http://localhost:8080/login', {
-    data: {
+    params: {
       id,
       password,
     },
@@ -12,7 +12,7 @@ export const handleLogin = async (id, password) => {
 
 export const handleSignup = async (name, id, password) => {
   const res = await aixos.post('http://localhost:8080/register', {
-    data: {
+    params: {
       name,
       id,
       password,

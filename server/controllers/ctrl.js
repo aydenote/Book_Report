@@ -4,14 +4,14 @@ const Post = require('../model/Post');
 
 const process = {
   login: async (req, res) => {
-    const user = new User(req.body.data);
+    const user = new User(req.body.params);
     const response = await user.login();
 
     return res.json(response);
   },
 
   register: async (req, res) => {
-    const user = new User(req.body.data);
+    const user = new User(req.body.params);
     const response = await user.register();
 
     return res.json(response);
