@@ -1,17 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { delCookie } from '../../cookie';
+import handleLogout from '../../util/logout';
 import { styled } from 'styled-components';
 
 const Logout = () => {
   const navigate = useNavigate();
-  const handleLogout = () => {
-    delCookie('id');
-    delCookie('token');
+  const clickLogout = () => {
+    handleLogout();
     navigate(-1);
   };
   return (
-    <ItemList onClick={handleLogout}>
+    <ItemList onClick={clickLogout}>
       Logout{' '}
       <svg
         fill="none"
