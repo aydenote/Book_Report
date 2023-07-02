@@ -2,9 +2,10 @@ import aixos from 'axios';
 import { getCookie } from '../cookie';
 
 export const createPost = async formData => {
+  const accessToken = getCookie('accessToken');
   const res = await aixos.post('http://localhost:8080/report/write', formData, {
     headers: {
-      Authorization: `Bearer ${getCookie('token')}`,
+      Authorization: `Bearer ${accessToken}`,
     },
   });
   return res.data;
@@ -12,9 +13,10 @@ export const createPost = async formData => {
 
 export const getPost = async () => {
   const userId = getCookie('id');
+  const accessToken = getCookie('accessToken');
   const res = await aixos.get(`http://localhost:8080/report/read`, {
     headers: {
-      Authorization: `Bearer ${getCookie('token')}`,
+      Authorization: `Bearer ${accessToken}`,
     },
     params: {
       userId,
@@ -25,9 +27,10 @@ export const getPost = async () => {
 
 export const delPost = async postId => {
   const userId = getCookie('id');
+  const accessToken = getCookie('accessToken');
   const res = await aixos.delete(`http://localhost:8080/report/delete`, {
     headers: {
-      Authorization: `Bearer ${getCookie('token')}`,
+      Authorization: `Bearer ${accessToken}`,
     },
     params: {
       userId,
