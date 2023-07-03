@@ -8,6 +8,13 @@ class User {
     this.body = body;
   }
 
+  async getInfo() {
+    const client = this.body;
+    const userInfo = await UserStorage.getUserInfo(client.id);
+
+    return userInfo;
+  }
+
   async login() {
     const client = this.body;
     try {
