@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import handleLogout from '../../util/logout';
+import { handleLogout } from '../../util/logout';
 import { styled } from 'styled-components';
 
 const Logout = () => {
