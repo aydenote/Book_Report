@@ -44,6 +44,16 @@ class User {
       return { success: false, err };
     }
   }
+
+  async createToken() {
+    const client = this.body;
+    try {
+      const newAccessToken = await createAccessToken(client.userId);
+      return { success: true, newAccessToken };
+    } catch (error) {
+      return { success: false, err };
+    }
+  }
 }
 
 module.exports = User;

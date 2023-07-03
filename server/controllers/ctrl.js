@@ -41,6 +41,13 @@ const process = {
 
     return res.json(response);
   },
+
+  createToken: async (req, res) => {
+    const user = new User(req.body.params);
+    const response = await user.createToken();
+
+    return res.json(response);
+  },
 };
 
 module.exports = { process };
