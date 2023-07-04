@@ -70,7 +70,7 @@ const verifyRefreshToken = async (req, res, next) => {
     jwt.verify(clientRefreshToken, process.env.REFRESH_TOKEN_KEY, err => {
       if (err) {
         if (err.name === 'TokenExpiredError') {
-          res.status(401).send({ type: 'expired', msg: 'Refresh 인증 토큰이 만료되었습니다.' });
+          res.status(401).send({ type: 'expired', msg: '인증 토큰 만료되었습니다. 다시 로그인해 주세요.' });
         } else if (err.name === 'JsonWebTokenError') {
           res.status(401).send({ type: 'damaged', msg: 'Refresh 인증 토큰이 손상되었습니다.' });
         } else {
