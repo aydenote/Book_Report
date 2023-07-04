@@ -10,7 +10,7 @@ const createAccessToken = userId => {
     },
     process.env.ACCESS_TOKEN_KEY,
     {
-      expiresIn: '1m',
+      expiresIn: '1h',
       issuer: 'ayden',
     }
   );
@@ -25,7 +25,7 @@ const createRefreshToken = userId => {
     },
     process.env.REFRESH_TOKEN_KEY,
     {
-      expiresIn: '2m',
+      expiresIn: '14 days',
       issuer: 'ayden',
     }
   );
