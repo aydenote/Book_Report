@@ -9,7 +9,7 @@ import LoginLinkLayout from '../layout/LoginLink.layout';
 import { getCookie } from '../cookie';
 
 const Home = () => {
-  const token = getCookie('token');
+  const token = getCookie('accessToken');
 
   return token ? (
     <HomeLayout>
