@@ -3,9 +3,7 @@ import { Cookies } from 'react-cookie';
 const cookies = new Cookies();
 
 export const setCookie = (name, value) => {
-  const expirationDate = new Date();
-  expirationDate.setHours(expirationDate.getHours() + 1);
-  return cookies.set(name, value, { expires: expirationDate });
+  return cookies.set(name, value);
 };
 
 export const getCookie = name => {
