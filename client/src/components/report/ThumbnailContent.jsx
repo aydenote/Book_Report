@@ -1,16 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getImageData } from '../../apis/post';
 import { styled } from 'styled-components';
 
-const ThumbnailContent = () => {
+const ThumbnailContent = ({ post }) => {
   return (
     <Container>
-      <ThumbnailImg />
-      <PostTitle>게시물에 대한 사용자 제목</PostTitle>
-      <PostDetail>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea voluptatibus molestias cum impedit non vitae
-        voluptates consectetur, voluptatem possimus ab. Doloremque commodi quo placeat libero repellat, earum
-        repellendus adipisci rem!
-      </PostDetail>
+      <ThumbnailImg src={post.imagePath} />
+      <PostTitle>{post.postTitle}</PostTitle>
+      <PostDetail>{post.content}</PostDetail>
     </Container>
   );
 };
@@ -25,9 +22,8 @@ const ThumbnailImg = styled.img`
   max-height: 22vh;
   width: 100%;
   height: 260px;
-  -o-object-fit: cover;
-  object-fit: cover;
-  filter: grayscale(1);
+  -o-object-fit: contain;
+  object-fit: contain;
 `;
 
 const PostTitle = styled.h2`

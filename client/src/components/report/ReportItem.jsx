@@ -7,20 +7,21 @@ import ModifyBtn from '../button/Modify';
 import DeleteBtn from '../button/Delete';
 import { styled } from 'styled-components';
 
-const ReportItem = () => {
+const ReportItem = ({ post }) => {
   const pathName = useLocation().pathname;
+
   return (
     <Container>
-      <ThumbnailTitle>더 리더</ThumbnailTitle>
+      <ThumbnailTitle>{post.bookTitle}</ThumbnailTitle>
       {pathName !== '/' ? (
         <BtnWrap>
           <AddBtn />
           <ModifyBtn />
-          <DeleteBtn />
+          <DeleteBtn post={post} />
         </BtnWrap>
       ) : null}
-      <Date>06.06.2023</Date>
-      <ThumbnailContent />
+      <Date>{post.date}</Date>
+      <ThumbnailContent post={post} />
     </Container>
   );
 };
