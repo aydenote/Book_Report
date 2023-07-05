@@ -6,7 +6,7 @@ import LoginLinkLayout from '../layout/LoginLink.layout';
 import { getCookie } from '../cookie';
 
 const Report = () => {
-  const token = getCookie('token');
+  const token = getCookie('accessToken');
   return (
     <ReportLayout>
       <MenuLayout />
