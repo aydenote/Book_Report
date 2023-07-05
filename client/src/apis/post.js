@@ -39,3 +39,11 @@ export const delPost = async postId => {
   });
   return res.data;
 };
+
+export const getImageData = async imagePath => {
+  const response = await aixos.get(`http://localhost:8080/image/${imagePath}`, {
+    responseType: 'blob',
+  });
+  const imageURL = await URL.createObjectURL(response.data);
+  return imageURL;
+};
