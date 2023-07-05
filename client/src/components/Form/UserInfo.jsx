@@ -53,7 +53,8 @@ const UserInfo = ({ children }) => {
       });
     } else {
       setCookie('id', watch().id);
-      setCookie('token', result.token);
+      setCookie('accessToken', result.newAccessToken);
+      setCookie('refreshToken', result.newRefreshToken);
       navigate('/');
     }
   };
