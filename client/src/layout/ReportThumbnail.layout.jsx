@@ -4,10 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setPost } from '../redux/action';
 import ReportItem from '../components/report/ReportItem';
 import Add from '../components/button/Add';
-import { setCookie } from '../cookie';
 import { getPost } from '../apis/post';
-import { handleRenewToken } from '../apis/user';
-import { handleTokenError } from '../util/tokenError';
+import { executeApiWithTokenReissue } from '../util/tokenReissue';
 import { styled } from 'styled-components';
 
 const ReportThumbnail = () => {
@@ -18,24 +16,10 @@ const ReportThumbnail = () => {
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        const response = await getPost();
+        const response = await executeApiWithTokenReissue(getPost, navigate);
         dispatch(setPost(response));
       } catch (error) {
-        const errData = await error.response.data;
-        if (errData.type === 'expired') {
-          try {
-            const refreshResponse = await handleRenewToken();
-            const newAccessToken = refreshResponse.newAccessToken;
-            setCookie('accessToken', newAccessToken);
-
-            const postResponse = await getPost();
-            dispatch(setPost(postResponse));
-          } catch (error) {
-            handleTokenError(error, navigate);
-          }
-        } else {
-          handleTokenError(error, navigate);
-        }
+        console.error(error);
       }
     };
     fetchPostData();
