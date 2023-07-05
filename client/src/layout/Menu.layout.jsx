@@ -5,7 +5,7 @@ import { getCookie } from '../cookie';
 import { styled } from 'styled-components';
 
 const MenuLayout = () => {
-  const token = getCookie('token');
+  const token = getCookie('accessToken');
   return (
     <MenuList>
       <MenuItem>Home</MenuItem>
