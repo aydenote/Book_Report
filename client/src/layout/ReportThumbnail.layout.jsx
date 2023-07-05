@@ -1,13 +1,18 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPost } from '../redux/action';
 import ReportItem from '../components/report/ReportItem';
 import Add from '../components/button/Add';
+import { setCookie } from '../cookie';
 import { getPost } from '../apis/post';
+import { handleRenewToken } from '../apis/user';
+import { handleTokenError } from '../util/tokenError';
 import { styled } from 'styled-components';
 
 const ReportThumbnail = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const postsInfo = useSelector(state => state.postInfo.data);
 
   useEffect(() => {
@@ -17,11 +22,24 @@ const ReportThumbnail = () => {
         dispatch(setPost(response));
       } catch (error) {
         const errData = await error.response.data;
-        alert(errData.msg);
+        if (errData.type === 'expired') {
+          try {
+            const refreshResponse = await handleRenewToken();
+            const newAccessToken = refreshResponse.newAccessToken;
+            setCookie('accessToken', newAccessToken);
+
+            const postResponse = await getPost();
+            dispatch(setPost(postResponse));
+          } catch (error) {
+            handleTokenError(error, navigate);
+          }
+        } else {
+          handleTokenError(error, navigate);
+        }
       }
     };
     fetchPostData();
-  }, [dispatch]);
+  }, [navigate, dispatch]);
 
   return (
     <>
