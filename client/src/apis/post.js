@@ -11,10 +11,10 @@ export const createPost = async formData => {
   return res.data;
 };
 
-export const getPost = async () => {
+export const getAllPost = async () => {
   const userId = getCookie('id');
   const accessToken = getCookie('accessToken');
-  const res = await aixos.get(`http://localhost:8080/report/read`, {
+  const res = await aixos.get(`http://localhost:8080/report/readAllPost`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
