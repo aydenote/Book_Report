@@ -15,5 +15,6 @@ router.post('/refresh', verifyRefreshToken, controller.process.createToken);
 router.get('/report/read', verifyAccessToken, controller.process.read);
 router.post('/report/write', verifyAccessToken, upload.single('image'), controller.process.create);
 router.delete('/report/delete', verifyAccessToken, controller.process.delete);
+router.get('/image/uploads/:imagePath', controller.process.image);
 
 module.exports = router;
