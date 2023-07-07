@@ -48,6 +48,13 @@ const process = {
 
     return res.json(response);
   },
+
+  image: async (req, res) => {
+    const imageName = req.params.imagePath;
+    const imagePath = path.join(__dirname, '../uploads', imageName);
+
+    res.sendFile(imagePath);
+  },
 };
 
 module.exports = { process };
