@@ -25,6 +25,19 @@ export const getAllPost = async () => {
   return res.data;
 };
 
+export const getSinglePost = async postId => {
+  const accessToken = getCookie('accessToken');
+  const res = await aixos.get(`http://localhost:8080/report/readSinglePost`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    params: {
+      postId,
+    },
+  });
+  return res.data;
+};
+
 export const delPost = async postId => {
   const userId = getCookie('id');
   const accessToken = getCookie('accessToken');
