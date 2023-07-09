@@ -1,10 +1,20 @@
 const db = require('../config/db');
 
 class PostStorage {
-  static getPostsInfo(id) {
+  static getAllPostsInfo(id) {
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM posts WHERE userId = ?;';
       db.query(query, [id], (err, data) => {
+        if (err) reject(`${err}`);
+        else resolve(data);
+      });
+    });
+  }
+
+  static getSinglePostsInfo(postId) {
+    return new Promise((resolve, reject) => {
+      const query = 'SELECT * FROM posts WHERE postId = ?;';
+      db.query(query, [postId], (err, data) => {
         if (err) reject(`${err}`);
         else resolve(data);
       });

@@ -25,10 +25,18 @@ const process = {
     return res.json(response);
   },
 
-  read: async (req, res) => {
+  readAllPost: async (req, res) => {
     const userId = req.query.userId;
     const post = new Post();
     const response = await post.getAllPost(userId);
+
+    return res.json(response);
+  },
+
+  readSinglePost: async (req, res) => {
+    const postId = req.query.postId;
+    const post = new Post();
+    const response = await post.getSinglePost(postId);
 
     return res.json(response);
   },

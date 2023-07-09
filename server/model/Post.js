@@ -27,7 +27,16 @@ class Post {
 
   async getAllPost(userId) {
     try {
-      const response = await PostStorage.getPostsInfo(userId);
+      const response = await PostStorage.getAllPostsInfo(userId);
+      return response;
+    } catch (err) {
+      return { success: false, err };
+    }
+  }
+
+  async getSinglePost(postId) {
+    try {
+      const response = await PostStorage.getSinglePostsInfo(postId);
       return response;
     } catch (err) {
       return { success: false, err };
