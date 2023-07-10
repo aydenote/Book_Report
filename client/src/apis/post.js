@@ -53,6 +53,16 @@ export const delPost = async postId => {
   return res.data;
 };
 
+export const editPost = async formData => {
+  const accessToken = getCookie('accessToken');
+  const res = await aixos.patch(`http://localhost:8080/report/edit`, formData, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return res.data;
+};
+
 export const getImageData = async imagePath => {
   const response = await aixos.get(`http://localhost:8080/image/${imagePath}`, {
     responseType: 'blob',
