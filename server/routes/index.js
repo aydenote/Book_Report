@@ -17,5 +17,6 @@ router.get('/report/readSinglePost', verifyAccessToken, controller.process.readS
 router.post('/report/write', verifyAccessToken, upload.single('image'), controller.process.create);
 router.delete('/report/delete', verifyAccessToken, controller.process.delete);
 router.get('/image/uploads/:imagePath', controller.process.image);
+router.patch('/report/edit', verifyAccessToken, upload.single('image'), controller.process.edit);
 
 module.exports = router;
