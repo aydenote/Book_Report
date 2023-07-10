@@ -6,8 +6,9 @@ import Create from '../button/Create';
 import Cancel from '../button/Cancel';
 import { createPost } from '../../apis/post';
 import { getCurrentDate } from '../../util/date';
-import { styled } from 'styled-components';
+import { executeApiWithTokenReissue } from '../../util/tokenReissue';
 import { getCookie } from '../../cookie';
+import { styled } from 'styled-components';
 
 const ReportInfo = () => {
   const {
@@ -36,8 +37,9 @@ const ReportInfo = () => {
     formData.append('image', image[0]);
 
     try {
-      const res = await createPost(formData);
-      if (res.success) navigate(-1);
+      const response = await executeApiWithTokenReissue(createPost, navigate, formData);
+      console.log(response);
+      if (response.success) navigate(-1);
     } catch (err) {
       console.error(err);
       alert(`${err.response.data.error}`);
