@@ -1,8 +1,28 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { delPost } from '../../apis/post';
+import { setPost } from '../../redux/action';
 import { styled } from 'styled-components';
+import { executeApiWithTokenReissue } from '../../util/tokenReissue';
 
-const Delete = () => {
-  return <DeleteBtn>삭제</DeleteBtn>;
+const Delete = ({ post }) => {
+  const dispatch = useDispatch();
+
+  const handleDeletePost = async event => {
+    const postId = event.target.dataset.post;
+    try {
+      const response = await executeApiWithTokenReissue(delPost, undefined, postId);
+      dispatch(setPost(response));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <DeleteBtn data-post={post.postId} onClick={handleDeletePost}>
+      삭제
+    </DeleteBtn>
+  );
 };
 
 export default Delete;
