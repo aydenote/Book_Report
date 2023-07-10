@@ -63,6 +63,21 @@ const process = {
 
     res.sendFile(imagePath);
   },
+
+  edit: async (req, res) => {
+    if (req.file) {
+      const imageFile = req.file.path;
+      const post = new Post(req.body, imageFile);
+      const response = await post.editPost();
+
+      return res.json(response);
+    } else {
+      const post = new Post(req.body);
+      const response = await post.editPost();
+
+      return res.json(response);
+    }
+  },
 };
 
 module.exports = { process };

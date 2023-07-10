@@ -54,6 +54,24 @@ class Post {
       return { success: false, err };
     }
   }
+
+  async editPost() {
+    const client = this.body;
+    const imagePath = this.imagePath;
+
+    try {
+      const response = await PostStorage.edit(
+        client.postId,
+        client.content,
+        imagePath,
+        client.postTitle,
+        client.bookTitle
+      );
+      return response;
+    } catch (err) {
+      return { success: false, err };
+    }
+  }
 }
 
 module.exports = Post;

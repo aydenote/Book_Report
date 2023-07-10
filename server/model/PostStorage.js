@@ -41,6 +41,26 @@ class PostStorage {
       });
     });
   }
+
+  static edit(postId, content, imagePath, postTitle, bookTitle) {
+    let query = '';
+    let columnValues = [];
+
+    if (imagePath) {
+      query = 'UPDATE posts SET content=?, imagePath=?, postTitle=?, bookTitle=? WHERE postId=?';
+      columnValues = [content, imagePath, postTitle, bookTitle, postId];
+    } else {
+      query = 'UPDATE posts SET content=?, postTitle=?, bookTitle=? WHERE postId=?';
+      columnValues = [content, postTitle, bookTitle, postId];
+    }
+
+    return new Promise((resolve, reject) => {
+      db.query(query, columnValues, (err, data) => {
+        if (err) reject(err);
+        else resolve({ success: true });
+      });
+    });
+  }
 }
 
 module.exports = PostStorage;
