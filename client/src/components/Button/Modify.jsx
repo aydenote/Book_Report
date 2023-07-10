@@ -1,8 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-const Modify = () => {
-  return <ModifyBtn>수정</ModifyBtn>;
+const Modify = ({ postId }) => {
+  const navigate = useNavigate();
+
+  const handleEditPost = () => {
+    navigate(`edit?postId=${postId}`);
+  };
+
+  return <ModifyBtn onClick={handleEditPost}>수정</ModifyBtn>;
 };
 
 export default Modify;
