@@ -16,7 +16,7 @@ const ReportItem = ({ post }) => {
       {pathName !== '/' ? (
         <BtnWrap>
           <AddBtn />
-          <ModifyBtn />
+          <ModifyBtn postId={post.postId} />
           <DeleteBtn post={post} />
         </BtnWrap>
       ) : null}
