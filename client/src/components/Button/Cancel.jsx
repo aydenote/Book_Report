@@ -1,8 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 const Cancel = () => {
-  return <CancelBtn>취소</CancelBtn>;
+  const navigate = useNavigate();
+  const handleCancel = () => {
+    navigate(-1);
+  };
+  return (
+    <CancelBtn type="button" onClick={handleCancel}>
+      취소
+    </CancelBtn>
+  );
 };
 
 export default Cancel;
