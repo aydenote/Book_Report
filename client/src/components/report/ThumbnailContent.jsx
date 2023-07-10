@@ -1,11 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { getImageData } from '../../apis/post';
+import { executeApiWithTokenReissue } from '../../util/tokenReissue';
 import { styled } from 'styled-components';
 
 const ThumbnailContent = ({ post }) => {
+  const [imageURL, setImageURL] = useState('');
+
+  useEffect(() => {
+    const postImageDown = async () => {
+      try {
+        const response = await executeApiWithTokenReissue(getImageData, undefined, post.imagePath);
+        setImageURL(response);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    postImageDown();
+  }, [post.imagePath]);
+
   return (
     <Container>
-      <ThumbnailImg src={post.imagePath} />
+      <ThumbnailImg src={imageURL} />
       <PostTitle>{post.postTitle}</PostTitle>
       <PostDetail>{post.content}</PostDetail>
     </Container>
