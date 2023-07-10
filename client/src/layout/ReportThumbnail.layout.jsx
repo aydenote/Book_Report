@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setPost } from '../redux/action';
 import ReportItem from '../components/report/ReportItem';
 import Add from '../components/button/Add';
-import { getPost } from '../apis/post';
+import { getAllPost } from '../apis/post';
 import { executeApiWithTokenReissue } from '../util/tokenReissue';
 import { styled } from 'styled-components';
 
@@ -16,7 +16,7 @@ const ReportThumbnail = () => {
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        const response = await executeApiWithTokenReissue(getPost, navigate);
+        const response = await executeApiWithTokenReissue(getAllPost, navigate);
         dispatch(setPost(response));
       } catch (error) {
         console.error(error);
