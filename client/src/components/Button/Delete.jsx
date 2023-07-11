@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { delPost } from '../../apis/post';
 import { setPost } from '../../redux/action';
@@ -7,11 +8,12 @@ import { executeApiWithTokenReissue } from '../../util/tokenReissue';
 
 const Delete = ({ post }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleDeletePost = async event => {
     const postId = event.target.dataset.post;
     try {
-      const response = await executeApiWithTokenReissue(delPost, undefined, postId);
+      const response = await executeApiWithTokenReissue(delPost, navigate, postId);
       dispatch(setPost(response));
     } catch (error) {
       console.error(error);

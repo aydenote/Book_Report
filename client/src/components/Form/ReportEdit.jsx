@@ -4,10 +4,10 @@ import { useForm } from 'react-hook-form';
 import Change from '../button/Change';
 import Cancel from '../button/Cancel';
 import { editPost, getImageData, getSinglePost } from '../../apis/post';
-import { styled } from 'styled-components';
 import { executeApiWithTokenReissue } from '../../util/tokenReissue';
+import { styled } from 'styled-components';
 
-const ReportEdit = ({ post }) => {
+const ReportEdit = () => {
   const {
     register,
     handleSubmit,
@@ -40,20 +40,23 @@ const ReportEdit = ({ post }) => {
   };
 
   useEffect(() => {
+    const getPostData = async () => {
+      try {
+        const response = await executeApiWithTokenReissue(getSinglePost, navigate, postId);
+        const imageData = await getImageData(response[0].imagePath);
+        setPostData(response[0]);
+        setImageSrc(imageData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     getPostData(postId);
-  }, [postId]);
+  }, [postId, navigate]);
 
   // 이미지 파일 업로드 시 blob 형식으로 state에 저장
   const changeImage = event => {
     const file = event.target.files[0];
     setImageSrc(URL.createObjectURL(file));
-  };
-
-  const getPostData = async postId => {
-    const post = await getSinglePost(postId);
-    const imageData = await getImageData(post[0].imagePath);
-    setPostData(post[0]);
-    setImageSrc(imageData);
   };
 
   return (

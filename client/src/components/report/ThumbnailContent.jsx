@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getImageData } from '../../apis/post';
 import { executeApiWithTokenReissue } from '../../util/tokenReissue';
 import { styled } from 'styled-components';
 
 const ThumbnailContent = ({ post }) => {
   const [imageURL, setImageURL] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const postImageDown = async () => {
       try {
-        const response = await executeApiWithTokenReissue(getImageData, undefined, post.imagePath);
+        const response = await executeApiWithTokenReissue(getImageData, navigate, post.imagePath);
         setImageURL(response);
       } catch (error) {
         console.error(error);
       }
     };
     postImageDown();
-  }, [post.imagePath]);
+  }, [post.imagePath, navigate]);
 
   return (
     <Container>
