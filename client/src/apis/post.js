@@ -1,9 +1,9 @@
-import aixos from 'axios';
+import axios from 'axios';
 import { getCookie } from '../cookie';
 
 export const createPost = async formData => {
   const accessToken = getCookie('accessToken');
-  const res = await aixos.post('http://localhost:8080/report/write', formData, {
+  const res = await axios.post('http://localhost:8080/report/write', formData, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -14,7 +14,7 @@ export const createPost = async formData => {
 export const getAllPost = async () => {
   const userId = getCookie('id');
   const accessToken = getCookie('accessToken');
-  const res = await aixos.get(`http://localhost:8080/report/readAllPost`, {
+  const res = await axios.get(`http://localhost:8080/report/readAllPost`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -27,7 +27,7 @@ export const getAllPost = async () => {
 
 export const getSinglePost = async postId => {
   const accessToken = getCookie('accessToken');
-  const res = await aixos.get(`http://localhost:8080/report/readSinglePost`, {
+  const res = await axios.get(`http://localhost:8080/report/readSinglePost`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -41,7 +41,7 @@ export const getSinglePost = async postId => {
 export const delPost = async postId => {
   const userId = getCookie('id');
   const accessToken = getCookie('accessToken');
-  const res = await aixos.delete(`http://localhost:8080/report/delete`, {
+  const res = await axios.delete(`http://localhost:8080/report/delete`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -55,7 +55,7 @@ export const delPost = async postId => {
 
 export const editPost = async formData => {
   const accessToken = getCookie('accessToken');
-  const res = await aixos.patch(`http://localhost:8080/report/edit`, formData, {
+  const res = await axios.patch(`http://localhost:8080/report/edit`, formData, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -64,7 +64,7 @@ export const editPost = async formData => {
 };
 
 export const getImageData = async imagePath => {
-  const response = await aixos.get(`http://localhost:8080/image/${imagePath}`, {
+  const response = await axios.get(`http://localhost:8080/image/${imagePath}`, {
     responseType: 'blob',
   });
   const imageURL = await URL.createObjectURL(response.data);

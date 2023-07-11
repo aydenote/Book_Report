@@ -1,8 +1,8 @@
-import aixos from 'axios';
+import axios from 'axios';
 import { getCookie } from '../cookie';
 
 export const handleLogin = async (id, password) => {
-  const res = await aixos.post('http://localhost:8080/login', {
+  const res = await axios.post('http://localhost:8080/login', {
     params: {
       id,
       password,
@@ -12,7 +12,7 @@ export const handleLogin = async (id, password) => {
 };
 
 export const handleSignup = async (name, id, password) => {
-  const res = await aixos.post('http://localhost:8080/register', {
+  const res = await axios.post('http://localhost:8080/register', {
     params: {
       name,
       id,
@@ -25,7 +25,7 @@ export const handleSignup = async (name, id, password) => {
 export const handleRenewToken = async () => {
   const userId = getCookie('id');
   const refreshToken = getCookie('refreshToken');
-  const res = await aixos.post(
+  const res = await axios.post(
     'http://localhost:8080/refresh',
     { params: { userId } },
     {
