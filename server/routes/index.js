@@ -14,9 +14,8 @@ router.post('/refresh', verifyRefreshToken, controller.process.createToken);
 // 게시물 정보
 router.get('/report/readAllPost', verifyAccessToken, controller.process.readAllPost);
 router.get('/report/readSinglePost', verifyAccessToken, controller.process.readSinglePost);
-router.post('/report/write', verifyAccessToken, upload.single('image'), controller.process.create);
+router.post('/report/write', verifyAccessToken, upload.single('image'), controller.process.createPost);
 router.delete('/report/delete', verifyAccessToken, controller.process.delete);
 router.get('/image/uploads/:imagePath', controller.process.image);
 router.patch('/report/edit', verifyAccessToken, upload.single('image'), controller.process.edit);
-
 module.exports = router;

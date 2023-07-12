@@ -17,7 +17,7 @@ const process = {
     return res.json(response);
   },
 
-  create: async (req, res) => {
+  createPost: async (req, res) => {
     const imageFile = req.file.path;
     const post = new Post(req.body, imageFile);
     const response = await post.addPost();
@@ -77,6 +77,14 @@ const process = {
 
       return res.json(response);
     }
+  },
+
+  readAllDiary: async (req, res) => {
+    const userId = req.query.userId;
+    const diary = new Diary();
+    const response = await diary.getAllDiary(userId);
+
+    return res.json(response);
   },
 };
 
