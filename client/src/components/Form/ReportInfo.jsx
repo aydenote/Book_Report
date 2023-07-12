@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import uuid from 'react-uuid';
+import ImageUpload from './ImageUpload';
 import Create from '../button/Create';
 import Cancel from '../button/Cancel';
 import { createPost } from '../../apis/post';
@@ -58,14 +59,7 @@ const ReportInfo = () => {
     <>
       <Title>create report</Title>
       <ReportForm onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-        <ImgWrap>
-          <ImagePreview src={imageSrc} />
-          <UploadWrap>
-            <ButtonLabel>
-              <InputFile id="image" type="file" accept="image/*" {...register('image')} />
-            </ButtonLabel>
-          </UploadWrap>
-        </ImgWrap>
+        <ImageUpload imageSrc={imageSrc} register={register} />
         <InputWrap>
           <InputTitle
             id="bookTitle"
@@ -111,64 +105,6 @@ const ReportForm = styled.form`
   display: flex;
   gap: 20px;
   margin: 1rem 0;
-`;
-
-const ImgWrap = styled.div`
-  display: block;
-  max-width: 300px;
-  width: 100%;
-  height: 300px;
-  margin: auto;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  background-color: white;
-  overflow: hidden;
-`;
-
-const ImagePreview = styled.img`
-  position: relative;
-  width: 100%;
-  height: 225px;
-  object-fit: contain;
-`;
-
-const UploadWrap = styled.div`
-  position: relative;
-  height: 75px;
-  overflow: hidden;
-  text-align: center;
-  transition: background-color ease-in-out 150ms;
-  background-color: cadetblue;
-  cursor: pointer;
-`;
-
-const ButtonLabel = styled.label`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  font-weight: 400;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  cursor: pointer;
-  &::after {
-    content: 'ADD';
-    font-size: 2.5rem;
-    color: #e6e6e6;
-  }
-`;
-
-const InputFile = styled.input`
-  position: absolute;
-  width: 0.1px;
-  height: 0.1px;
-  overflow: hidden;
-  opacity: 0;
-  z-index: -1;
 `;
 
 const InputWrap = styled.div`
