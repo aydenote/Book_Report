@@ -1,6 +1,7 @@
 const path = require('path');
 const User = require('../model/User');
 const Post = require('../model/Post');
+const Diary = require('../model/Diary');
 
 const process = {
   login: async (req, res) => {
@@ -83,6 +84,13 @@ const process = {
     const userId = req.query.userId;
     const diary = new Diary();
     const response = await diary.getAllDiary(userId);
+
+    return res.json(response);
+  },
+
+  createDiary: async (req, res) => {
+    const diary = new Diary(req.body);
+    const response = await diary.addDiary();
 
     return res.json(response);
   },
