@@ -18,4 +18,7 @@ router.post('/report/write', verifyAccessToken, upload.single('image'), controll
 router.delete('/report/delete', verifyAccessToken, controller.process.delete);
 router.get('/image/uploads/:imagePath', controller.process.image);
 router.patch('/report/edit', verifyAccessToken, upload.single('image'), controller.process.edit);
+
+// 일기 정보
+router.post('/diary/write', upload.single('diary'), controller.process.createDiary);
 module.exports = router;
