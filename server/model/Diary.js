@@ -20,6 +20,15 @@ class Diary {
       return { success: false, err };
     }
   }
+
+  async getAllDiary(userId) {
+    try {
+      const response = await DiaryStorage.getAllDiaryInfo(userId);
+      return response;
+    } catch (err) {
+      return { success: false, err };
+    }
+  }
 }
 
 module.exports = Diary;
