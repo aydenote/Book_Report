@@ -39,7 +39,6 @@ const ReportInfo = () => {
 
     try {
       const response = await executeApiWithTokenReissue(createPost, navigate, formData);
-      console.log(response);
       if (response.success) navigate(-1);
     } catch (err) {
       console.error(err);
