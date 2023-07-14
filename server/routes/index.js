@@ -21,5 +21,6 @@ router.patch('/report/edit', verifyAccessToken, upload.single('image'), controll
 
 // 일기 정보
 router.get('/diary/readAllDiary', verifyAccessToken, controller.process.readAllDiary);
+router.get('/diary/readSingleDiary', verifyAccessToken, controller.process.readSingleDiary);
 router.post('/diary/write', upload.single('diary'), controller.process.createDiary);
 module.exports = router;
