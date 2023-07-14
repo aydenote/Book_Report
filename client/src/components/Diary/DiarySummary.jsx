@@ -2,30 +2,23 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import AddBtn from '../button/Add';
 import ModifyBtn from '../button/Modify';
-import DeleteBtn from '../button/Delete';
+import ThumbnailTitle from '../report/ThumbnailTitle';
 import { styled } from 'styled-components';
 
-const DiarySummary = () => {
+const DiarySummary = ({ diary }) => {
   const pathName = useLocation().pathname;
+
   return (
     <Container>
+      <ThumbnailTitle>{diary.diaryTitle}</ThumbnailTitle>
       {pathName !== '/' ? (
         <BtnWrap>
           <AddBtn />
-          <ModifyBtn />
-          <DeleteBtn />
+          <ModifyBtn postId={diary.diaryId} />
         </BtnWrap>
       ) : null}
-      <Header>
-        <DiaryNum>1</DiaryNum>
-        <DiaryDate>11.06.2023</DiaryDate>
-      </Header>
-      <DiaryTitle>테스트용 일기 타이틀</DiaryTitle>
-      <DiaryContent>
-        테스트용 일기 내용 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum sapiente sunt facere quas
-        quae debitis dignissimos blanditiis provident nulla, excepturi tenetur eos inventore tempora labore veniam
-        officia fuga cupiditate aliquid.
-      </DiaryContent>
+      <Date>{diary.date}</Date>
+      <DiaryContent>{diary.content}</DiaryContent>
     </Container>
   );
 };
@@ -35,45 +28,9 @@ export default DiarySummary;
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   flex-shrink: 0;
   min-height: 100%;
-  padding: 0 20px;
   scroll-snap-align: start;
-  &:not(:first-child) {
-    margin-top: 40px;
-  }
-`;
-
-const Header = styled.section`
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-`;
-
-const DiaryNum = styled.p`
-  margin-bottom: 16px;
-  font-size: 56px;
-  font-family: 'Space Grotesk', sans-serif;
-`;
-
-const DiaryDate = styled.p`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const DiaryTitle = styled.p`
-  max-width: 16ch;
-  font-size: 28px;
-  font-weight: 600;
-  font-family: 'Space Grotesk', sans-serif;
-  letter-spacing: -2px;
-`;
-
-const DiaryContent = styled.p`
-  font-size: 15px;
-  margin-top: 12px;
-  line-height: 1.4;
 `;
 
 const BtnWrap = styled.section`
@@ -81,3 +38,18 @@ const BtnWrap = styled.section`
   justify-content: flex-end;
   gap: 20px;
 `;
+
+const Date = styled.p`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #94918f;
+  font-size: 22px;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+  color: #161419;
+`;
+
+const DiaryContent = styled.p``;
