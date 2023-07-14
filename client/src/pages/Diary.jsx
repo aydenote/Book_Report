@@ -6,7 +6,7 @@ import LoginLinkLayout from '../layout/LoginLink.layout';
 import { getCookie } from '../cookie';
 
 const Diary = () => {
-  const token = getCookie('token');
+  const token = getCookie('accessToken');
 
   return (
     <ReportLayout>
