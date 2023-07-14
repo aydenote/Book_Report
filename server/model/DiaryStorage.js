@@ -11,6 +11,16 @@ class DiaryStorage {
     });
   }
 
+  static getSingleDiaryInfo(diaryId) {
+    return new Promise((resolve, reject) => {
+      const query = 'SELECT * FROM diary WHERE diaryId = ?;';
+      db.query(query, [diaryId], (err, data) => {
+        if (err) reject(`${err}`);
+        else resolve(data);
+      });
+    });
+  }
+
   static async save(userId, diaryId, diaryTitle, content, date) {
     return new Promise((resolve, reject) => {
       const query = 'INSERT INTO diary(userId, diaryId, diaryTitle, content, date) VALUES(?, ?, ?, ?, ?);';

@@ -29,6 +29,15 @@ class Diary {
       return { success: false, err };
     }
   }
+
+  async getSingleDiary(diaryId) {
+    try {
+      const response = await DiaryStorage.getSingleDiaryInfo(diaryId);
+      return response;
+    } catch (err) {
+      return { success: false, err };
+    }
+  }
 }
 
 module.exports = Diary;
