@@ -15,6 +15,19 @@ export const getAllDiary = async () => {
   return res.data;
 };
 
+export const getSingleDiary = async diaryId => {
+  const accessToken = getCookie('accessToken');
+  const res = await axios.get(`http://localhost:8080/diary/readSingleDiary`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    params: {
+      diaryId,
+    },
+  });
+  return res.data;
+};
+
 export const createDiary = async formData => {
   const accessToken = getCookie('accessToken');
   const res = await axios.post('http://localhost:8080/diary/write', formData, {
