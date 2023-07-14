@@ -1,18 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setDiary } from '../redux/action';
 import Quote from '../components/diary/Quote';
+import Add from '../components/button/Add';
+import DiarySummary from '../components/diary/DiarySummary';
+import { executeApiWithTokenReissue } from '../util/tokenReissue';
+import { getAllDiary } from '../apis/diary';
 import { styled } from 'styled-components';
-import SummaryDiary from '../components/diary/DiarySummary';
 
 const DiaryLayout = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const allDiaryInfo = useSelector(state => state.diaryInfo.data);
+
+  useEffect(() => {
+    const fetchPostData = async () => {
+      try {
+        const response = await executeApiWithTokenReissue(getAllDiary, navigate);
+        dispatch(setDiary(response));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchPostData();
+  }, [navigate, dispatch]);
+
   return (
     <Container>
       <Quote />
-      <DiaryTitle>Diary</DiaryTitle>
-      <DiaryWrap>
-        <SummaryDiary />
-        <SummaryDiary />
-        <SummaryDiary />
-      </DiaryWrap>
+      {allDiaryInfo.length > 0 ? (
+        <DiaryContainer>
+          {allDiaryInfo.map(diary => (
+            <DiarySummary diary={diary} key={diary.diaryId} />
+          ))}
+        </DiaryContainer>
+      ) : (
+        <PostAddContainer>
+          <Notice>게시물이 없습니다.</Notice>
+          <Add />
+        </PostAddContainer>
+      )}
     </Container>
   );
 };
@@ -22,29 +50,13 @@ export default DiaryLayout;
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  padding: 0 20px;
 `;
 
-const DiaryTitle = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 100px 0 20px 0;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #94918f;
-  letter-spacing: -1px;
-  font-size: 25px;
-  font-family: 'Playfair Display', serif;
-
-  @media screen and (max-width: 1260px) {
-    margin-top: 6vw;
-  }
-`;
-
-const DiaryWrap = styled.section`
+const DiaryContainer = styled.section`
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding: 0 20px;
   border-right: 1px solid #94918f;
   overflow-y: auto;
   overflow-x: hidden;
@@ -56,4 +68,20 @@ const DiaryWrap = styled.section`
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
   }
+`;
+
+const PostAddContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0 20px;
+  border-right: 1px solid #94918f;
+`;
+
+const Notice = styled.p`
+  margin: 10px 0;
+  text-align: center;
+  font-size: 2vw;
+  font-weight: 800;
 `;
