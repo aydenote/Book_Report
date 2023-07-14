@@ -88,6 +88,14 @@ const process = {
     return res.json(response);
   },
 
+  readSingleDiary: async (req, res) => {
+    const diaryId = req.query.diaryId;
+    const diary = new Diary();
+    const response = await diary.getSingleDiary(diaryId);
+
+    return res.json(response);
+  },
+
   createDiary: async (req, res) => {
     const diary = new Diary(req.body);
     const response = await diary.addDiary();
